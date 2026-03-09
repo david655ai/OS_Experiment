@@ -3,38 +3,9 @@ Experiments of OS in Second Semester of Third Year
 
 
 ## Modules
-
+- kthread_list_module_1: List Kernel Threads (LKM)
+- kthread_list_module_2: List process information with parameter
 - file_copy_module: parameterized kernel module for copying a file at load time
 
-=======
-## Exp1 Q1 - List Kernel Threads (LKM)
 
-功能：列出系统中所有 **内核线程** 的
-- 程序名（COMM）
-- PID
-- 进程状态（STATE）
-- 进程优先级（PRIO）
-- 父进程 PID（PPID）
-
-实现方式：内核模块创建 `/proc/kthread_list`，用户态 `cat` 读取。
-
-### 环境要求
-```bash
-sudo apt update
-sudo apt install -y build-essential linux-headers-$(uname -r)
-```
-### 相关命令
-编译
-```
-make
-```
-加载与查看
-```
-sudo insmod kthread_list.ko
-cat /proc/kthread_list | head -n 30
-```
-卸载
-```
-sudo rmmod kthread_list
-```
 

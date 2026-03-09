@@ -1,0 +1,23 @@
+## 编译：
+```
+make
+```
+## 加载模块：
+```
+sudo insmod proc_family.ko pid=1234
+```
+## 查看输出：
+```
+cat /proc/proc_family
+```
+## 卸载：
+```
+sudo rmmod proc_family
+```
+##怎么选一个“好测试的 PID”
+
+你可以先找一个明显有子进程的程序，比如 shell / vscode-server / sshd 等：
+```
+ps -ef | head
+ps -ef | grep sshd
+```
