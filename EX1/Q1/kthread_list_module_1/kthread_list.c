@@ -14,8 +14,8 @@
 static struct proc_dir_entry *proc_entry;
 
 /*
- * /proc/kthread_list 的输出函数
- * 列出所有内核线程：comm, pid, state, prio, ppid
+  /proc/kthread_list 的输出函数
+  列出所有内核线程：comm, pid, state, prio, ppid
  */
 static int kthread_list_show(struct seq_file *m, void *v)
 {
@@ -25,12 +25,10 @@ static int kthread_list_show(struct seq_file *m, void *v)
                "COMM", "PID", "STATE", "PRIO", "PPID");
     seq_printf(m, "--------------------------------------------------\n");
 
-    /*
-     * 遍历进程列表时使用 RCU 读锁，避免并发修改导致的问题
-     */
+    // 遍历进程列表时使用 RCU 读锁，避免并发修改导致的问题
     rcu_read_lock();
     for_each_process(p) {
-        /* 只保留内核线程 */
+        // 只保留内核线程
         if (!(p->flags & PF_KTHREAD))
             continue;
 
@@ -51,7 +49,6 @@ static int kthread_list_open(struct inode *inode, struct file *file)
     return single_open(file, kthread_list_show, NULL);
 }
 
-/* 6.x 内核使用 proc_ops */
 static const struct proc_ops kthread_list_proc_ops = {
     .proc_open    = kthread_list_open,
     .proc_read    = seq_read,
