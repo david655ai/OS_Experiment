@@ -216,4 +216,5 @@ static void __exit hostname_modify_module_exit(void)
 module_init(hostname_modify_module_init);
 module_exit(hostname_modify_module_exit);
 
+MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("带参数的主机名修改模块");
