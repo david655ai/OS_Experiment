@@ -1,0 +1,2 @@
+alias hi="echo RC_OK"
+export RC_NAME=from_rc

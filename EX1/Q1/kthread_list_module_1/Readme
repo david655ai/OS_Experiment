@@ -7,6 +7,12 @@
 - 进程优先级（PRIO）
 - 父进程 PID（PPID）
 
+支持筛选参数：
+- `ppid_filter`：按父进程 PID 过滤，默认 `-1`（不过滤）
+- `prio_min` / `prio_max`：按优先级区间过滤，默认 `0..139`
+- `state_filter`：按状态字符过滤，如 `S`、`R`、`SI`（多个字符表示并集）
+- `comm_filter`：按线程名子串过滤，如 `kworker`
+
 实现方式：内核模块创建 `/proc/kthread_list`，用户态 `cat` 读取。
 
 ### 环境要求
@@ -22,6 +28,18 @@ make
 加载与查看
 ```
 sudo insmod kthread_list.ko
+cat /proc/kthread_list | head -n 30
+```
+
+带筛选加载示例
+```
+# 仅看父进程为 2 且状态为 S/I 的内核线程
+sudo insmod kthread_list.ko ppid_filter=2 state_filter=SI
+cat /proc/kthread_list | head -n 30
+
+# 仅看名称包含 kworker 且 prio 在 100~139 的线程
+sudo rmmod kthread_list
+sudo insmod kthread_list.ko comm_filter=kworker prio_min=100 prio_max=139
 cat /proc/kthread_list | head -n 30
 ```
 卸载

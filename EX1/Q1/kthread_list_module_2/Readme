@@ -8,6 +8,11 @@ sudo insmod proc_family.ko pid=1234
 ```
 ## 查看输出：
 ```
+/sys/module/proc_family/parameters/pid
+查看pid的值
+```
+
+```
 cat /proc/proc_family
 ```
 ## 卸载：
