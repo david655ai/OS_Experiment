@@ -1,0 +1,17 @@
+./mini_shell  pwd  cd ..  pwd  help
+
+ls -l
+
+echo hello > out.txt  cat < out.txt  echo world >> out.txt  cat out.txt
+
+ls -l | wc -l
+
+echo $HOME
+
+echo "hello space"
+
+sleep 3 & 
+
+Ctrl+C sleep 10  Ctrl+C  status
+
+exit
